@@ -1,12 +1,8 @@
 # Calne
 
-keys.py
+This iteration of CalneBot sits on twitter and listens to its userstream
+if it will reply with weather info on the location it is given.
 
-#twitter details
-TWITTER_CONSUMER_KEY = 'KEY HERE'
-TWITTER_CONSUMER_SECRET = 'KEY HERE'
-TWITTER_ACCESS_KEY = 'KEY HERE'
-TWITTER_ACCESS_SECRET = 'KEY HERE'
+fill in keys_template.py and rename to keys.py
 
-#OpenWeatherMap
-OWM_API_KEY = "API KEY HERE"
+~Mirai
