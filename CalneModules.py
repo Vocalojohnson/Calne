@@ -95,9 +95,9 @@ def getPoem (phrase):
 		selected_words.append(random.choice(finallist)[0]) #save a word
 
 	#create tweet
-	tweet = selected_words[0] + ", " +  selected_words[1] + ", " + selected_words[2] + "\n"
-	tweet += selected_words[3] + ", " +  selected_words[4] + ", " + selected_words[5] + "\n"
-	tweet += selected_words[6] + ", " +  selected_words[7] + ", " + selected_words[8] + "\n"
+	tweet = selected_words[0] + ", " +  selected_words[1] + ", " + selected_words[2] + "!\n"
+	tweet += selected_words[3] + ", " +  selected_words[4] + ", " + selected_words[5] + "!\n"
+	tweet += selected_words[6] + ", " +  selected_words[7] + ", " + selected_words[8] + "...\n"
 	tweet += "\nDeath."
 
 	return tweet
