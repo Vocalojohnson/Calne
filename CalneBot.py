@@ -1,18 +1,19 @@
 # CalneBot
 
 # Constantly monitors its own feed.
-# If someone tweets to it using '@CalneBot', it will take the next parameter as a command and the ones after as parameters
+# If someone tweets to it using the bots handle, it will take the next parameter as a command and the ones after as parameters
 # and replies to the original tweet with something.
 
 import sys
 from twython import Twython
 from twython import TwythonStreamer
 from CalneModules import getWeather
-from keys import TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_KEY, TWITTER_ACCESS_SECRET
+from CalneModules import getPoem
+from config import TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_KEY, TWITTER_ACCESS_SECRET, TWITTER_HANDLE
 
 twit = Twython(TWITTER_CONSUMER_KEY,TWITTER_CONSUMER_SECRET,TWITTER_ACCESS_KEY,TWITTER_ACCESS_SECRET) #access twitter REST api
 
-
+handle=TWITTER_HANDLE.lower()
 
 
 class MyStreamer(TwythonStreamer): #create a stream class
@@ -23,14 +24,17 @@ class MyStreamer(TwythonStreamer): #create a stream class
 			user = data['user']['screen_name'] #pull out the username
 			word = data['text'].encode('utf-8').split() #pull out the tweet and splits it at spaces.
 			print word
-			if word[0].lower() == '@calnebot': #if it starts with @CalneBot (not case sensitive)
+			if word[0].lower() == handle: #if it starts with bots handle (not case sensitive)
 				command = word[1].lower() #pull command (not case sensitive)
 				params = word[2:] #pull parameters (case sensitive)
 				reply = '@'+user + '\n' #prep reply
 				
+			#DO THE THING
+				
 				if command == "weather": #if weather command
-					weather = getWeather(params[0]) #create tweet with location	
-					reply += weather #add weather
+					reply += getWeather(params[0]) #create tweet with location	
+				elif command == "poem":
+					reply += getPoem(params)
 				else: #if command not found
 					reply += "Sorry, I don't know '"+command+"' yet :(" #apologise
 					
