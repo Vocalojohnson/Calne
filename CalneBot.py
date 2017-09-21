@@ -7,8 +7,9 @@
 import sys
 from twython import Twython
 from twython import TwythonStreamer
-from CalneModules import getWeather
-from CalneModules import getPoem
+
+import CalneModules
+
 from config import TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_ACCESS_KEY, TWITTER_ACCESS_SECRET, TWITTER_HANDLE
 
 twit = Twython(TWITTER_CONSUMER_KEY,TWITTER_CONSUMER_SECRET,TWITTER_ACCESS_KEY,TWITTER_ACCESS_SECRET) #access twitter REST api
@@ -32,9 +33,11 @@ class MyStreamer(TwythonStreamer): #create a stream class
 			#DO THE THING
 				
 				if command == "weather": #if weather command
-					reply += getWeather(params[0]) #create tweet with location	
+					reply += CalneModules.getWeather(params[0]) #create tweet with location	
 				elif command == "poem":
-					reply += getPoem(params)
+					reply += CalneModules.getPoem(params) #make poem using phrase
+				elif command == "8ball":
+					reply += CalneModules.eightball() #Explore the mysteries of the future
 				else: #if command not found
 					reply += "Sorry, I don't know '"+command+"' yet :(" #apologise
 					
